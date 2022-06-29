@@ -6,10 +6,15 @@ import axios from "axios";
 function Sample() {
   const [initialList, setInitialList] = useState([]);
 
+  //menu states
   const [menuState, setMenuState] = useState(false);
   const [mobileFilter, setMobileFilter] = useState(false);
-  const [daysController, setDaysController]=useState(true);
+  const [daysController, setDaysController] = useState(true);
+  const [subjectController, setSubjectController]=useState(true);
+  const [virtController, setVirtController]=useState(true);
+  const [timeController, setTimeController]=useState(true);
 
+  //Day states
   const [monday, setMon] = useState(false);
   const [tuesday, setTue] = useState(false);
   const [wednesday, setWed] = useState(false);
@@ -17,7 +22,21 @@ function Sample() {
   const [friday, setFri] = useState(false);
   const [saturday, setSat] = useState(false);
   const [sunday, setSun] = useState(false);
-
+  //subject states
+  const [math, setMATH] = useState(false);
+  const [phys, setPHYS] = useState(false);
+  const [chem, setCHEM] = useState(false);
+  const [bio, setBIO] = useState(false);
+  const [eng, setENG] = useState(false);
+  const [cs, setCS] = useState(false);
+  const [ush, setUSH] = useState(false);
+  //time-of-day states
+  const [morn, setMorn] = useState(false);
+  const [noon, setNoon] = useState(false);
+  const [evening, setEve] = useState(false);
+  //virtual or in person states
+  const [virtual, setVirtual] = useState(false);
+  const [person, setPerson] = useState(false);
 
   function sortAscending() {
     const tempArray = initialList;
@@ -177,36 +196,52 @@ function Sample() {
     );
   };
   function MapTutors() {
-    return initialList.map((currentTutor) => {
+    if (initialList.length > 0) {
+      return initialList.map((currentTutor) => {
+        return (
+          <TutorComponent
+            data={currentTutor}
+            deleteRecord={currentTutor}
+            key={currentTutor._id}
+          >
+            {currentTutor}
+          </TutorComponent>
+        );
+      });
+    } else {
       return (
-        <TutorComponent
-          data={currentTutor}
-          deleteRecord={currentTutor}
-          key={currentTutor._id}
-        >
-          {currentTutor}
-        </TutorComponent>
+        <div class="col-span-3 text-center mt-96">
+          <div class=" font-extrabold text-2xl">Error: </div>
+          <div class="text-xl ">
+            Please wait for the server to load our tutors. Thank you!
+          </div>
+        </div>
       );
-    });
+    }
   }
-  function DayFilter() {
+  function FilteredList() {
     return initialList
       .filter(
         (tutor) =>
-          (monday &&
-          tutor.mon_status == true) ||
-          (tuesday &&
-          tutor.tues_status == true)||
-          (wednesday &&
-          tutor.weds_status == true)||
-          (thursday &&
-          tutor.thurs_status == true)||
-          (friday &&
-          tutor.fri_status == true)||
-          (saturday &&
-          tutor.sat_status == true)||
-          (sunday &&
-          tutor.sun_status == true)
+          (monday && tutor.mon_status == true) ||
+          (tuesday && tutor.tues_status == true) ||
+          (wednesday && tutor.weds_status == true) ||
+          (thursday && tutor.thurs_status == true) ||
+          (friday && tutor.fri_status == true) ||
+          (saturday && tutor.sat_status == true) ||
+          (sunday && tutor.sun_status == true) ||
+          (math && tutor.subj_status == "Math") ||
+          (bio && tutor.subj_status == "Biology") ||
+          (cs && tutor.subj_status == "Computer Science") ||
+          (ush && tutor.subj_status == "U.S. History") ||
+          (phys && tutor.subj_status == "Physics") ||
+          (chem && tutor.subj_status == "Chemistry") ||
+          (eng && tutor.subj_status == "English") ||
+          (morn && tutor.morn_status == true) ||
+          (noon && tutor.noon_status == true) ||
+          (evening && tutor.evening_status == true) ||
+          (virtual && tutor.virt_status == false) ||
+          (person && tutor.virt_status == true)
       )
 
       .map((currentTutor) => {
@@ -221,6 +256,7 @@ function Sample() {
         );
       });
   }
+
   function ListBody() {
     if (
       monday ||
@@ -229,9 +265,21 @@ function Sample() {
       thursday ||
       friday ||
       saturday ||
-      sunday
+      sunday ||
+      math ||
+      cs ||
+      bio ||
+      phys ||
+      chem ||
+      ush ||
+      eng ||
+      morn ||
+      noon ||
+      evening ||
+      virtual ||
+      person
     ) {
-      return <DayFilter />;
+      return <FilteredList />;
     } else {
       return <MapTutors />;
     }
@@ -256,12 +304,8 @@ function Sample() {
     <div className=" min-h-screen">
       <div class="bg-white">
         <div>
-          {/*}
-      Mobile filter dialog
-
-      Off-canvas filters for mobile, show/hide based on off-canvas filters state.
-    */}
-          <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
+          {/*Mobile filter dialog*/}
+          <div class={mobileFilter?"invisible":"relative z-40 lg:hidden"} role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-black bg-opacity-25"></div>
 
             <div class="fixed inset-0 flex z-40">
@@ -270,6 +314,7 @@ function Sample() {
                   <h2 class="text-lg font-medium text-gray-900">Filters</h2>
                   <button
                     type="button"
+                    onClick={()=>setMobileFilter(!mobileFilter)}
                     class="-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400"
                   >
                     <span class="sr-only">Close menu</span>
@@ -301,39 +346,47 @@ function Sample() {
                         aria-controls="filter-section-mobile-0"
                         aria-expanded="false"
                       >
-                        <span class="font-medium text-gray-900"> Days Available </span>
+                        <span class="font-medium text-gray-900">
+                          {" "}
+                          Days Available{" "}
+                        </span>
                         <span class="ml-6 flex items-center">
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
-
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
+                        <div onClick={() => setDaysController(true)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div onClick={() => setDaysController(false)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
                         </span>
                       </button>
                     </h3>
-                    <div class="pt-6" id="filter-section-0">
+                    <div class={daysController
+                          ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"} id="filter-section-0">
                       <div class="space-y-4">
                         <div class="flex items-center">
                           <input
@@ -374,7 +427,8 @@ function Sample() {
                           <input
                             id="filter-color-2"
                             name="color[]"
-                            value="blue"
+                            value="}
+                            Wednesday"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
                             onClick={() => setWed(!wednesday)}
@@ -392,7 +446,7 @@ function Sample() {
                           <input
                             id="filter-color-3"
                             name="color[]"
-                            value="brown"
+                            value="day"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
                             onClick={() => setThu(!thursday)}
@@ -410,7 +464,7 @@ function Sample() {
                           <input
                             id="filter-color-4"
                             name="color[]"
-                            value="green"
+                            value="Friday"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
                             onClick={() => setFri(!friday)}
@@ -467,277 +521,377 @@ function Sample() {
                       <button
                         type="button"
                         class="px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
-                        aria-controls="filter-section-mobile-1"
+                        aria-controls="filter-section-mobile-0"
                         aria-expanded="false"
                       >
-                        <span class="font-medium text-gray-900">
-                          {" "}
-                          Category{" "}
-                        </span>
-                        <span class="ml-6 flex items-center">
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
+                        <span class="font-medium text-gray-900"> Subject</span>
 
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
+                        <span class="ml-6 flex items-center ">
+                          <div onClick={() => setSubjectController(true)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div onClick={() => setSubjectController(false)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
                         </span>
                       </button>
                     </h3>
-                    <div class="pt-6" id="filter-section-mobile-1">
+                    <div
+                      class={
+                        subjectController
+                          ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"
+                      }
+                      id="filter-section-0"
+                    >
                       <div class="space-y-6">
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-category-0"
-                            name="category[]"
-                            value="new-arrivals"
+                            id="filter-mobile-color-0"
+                            name="color[]"
+                            value="Mathematics"
                             type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setMATH(!math)}
                           ></input>
                           <label
-                            for="filter-mobile-category-0"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-color-0"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
                           >
-                            {" "}
-                            New Arrivals{" "}
+                            Mathematics
                           </label>
                         </div>
 
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-category-1"
-                            name="category[]"
-                            value="sale"
+                            id="filter-mobile-color-1"
+                            name="color[]"
+                            value="Chemistry"
                             type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setCHEM(!chem)}
                           ></input>
                           <label
-                            for="filter-mobile-category-1"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-mobile-color-1"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
                           >
-                            {" "}
-                            Sale{" "}
+                            Chemistry
                           </label>
                         </div>
 
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-category-2"
-                            name="category[]"
-                            value="travel"
+                            id="filter-color-2"
+                            name="color[]"
+                            value="Physics"
                             type="checkbox"
-                            checked
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setPHYS(!phys)}
                           ></input>
                           <label
-                            for="filter-mobile-category-2"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-color-2"
+                            class="ml-3  min-w-0 flex-1 text-gray-600"
                           >
                             {" "}
-                            Travel{" "}
+                            Physics{" "}
                           </label>
                         </div>
 
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-category-3"
-                            name="category[]"
-                            value="organization"
+                            id="filter-color-3"
+                            name="color[]"
+                            value="Bio"
                             type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setBIO(!bio)}
                           ></input>
                           <label
-                            for="filter-mobile-category-3"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-mobile-color-3"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
                           >
                             {" "}
-                            Organization{" "}
+                            Biology{" "}
                           </label>
                         </div>
 
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-category-4"
-                            name="category[]"
-                            value="accessories"
+                            id="filter-mobile-color-4"
+                            name="color[]"
+                            value="English"
                             type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setENG(!eng)}
                           ></input>
                           <label
-                            for="filter-mobile-category-4"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-mobile-color-4"
+                            class="ml-3  min-w-0 flex-1 text-gray-600"
                           >
                             {" "}
-                            Accessories{" "}
+                            English{" "}
+                          </label>
+                        </div>
+
+                        <div class="flex items-center">
+                          <input
+                            id="filter-mobile-color-5"
+                            name="color[]"
+                            value="CS"
+                            type="checkbox"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setCS(!cs)}
+                          ></input>
+                          <label
+                            for="filter-mobile-color-5"
+                            class="ml-3  min-w-0 flex-1 text-gray-600"
+                          >
+                            Computer Science
+                          </label>
+                        </div>
+                        <div class="flex items-center">
+                          <input
+                            id="filter-mobile-color-6"
+                            name="color[]"
+                            value="USH"
+                            type="checkbox"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setUSH(!ush)}
+                          ></input>
+                          <label
+                            for="filter-mobile-color-6"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
+                          >
+                            {" "}
+                            U.S. History{" "}
                           </label>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <div class="border-t border-gray-200 px-4 py-6">
                     <h3 class="-mx-2 -my-3 flow-root">
                       <button
                         type="button"
                         class="px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
-                        aria-controls="filter-section-mobile-2"
+                        aria-controls="filter-section-mobile-0"
                         aria-expanded="false"
                       >
-                        <span class="font-medium text-gray-900"> Size </span>
-                        <span class="ml-6 flex items-center">
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
+                        <span class="font-medium text-gray-900">
+                          {" "}
+                          Times Available{" "}
+                        </span>
 
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
+                        <span class="ml-6 flex items-center ">
+                          <div onClick={() => setTimeController(true)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div onClick={() => setTimeController(false)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
                         </span>
                       </button>
                     </h3>
-                    <div class="pt-6" id="filter-section-mobile-2">
-                      <div class="space-y-6">
+                    <div
+                      class={
+                        timeController
+                          ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"
+                      }
+                      id="filter-section-0"
+                    >
+                      <div class="space-y-4">
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-size-0"
-                            name="size[]"
-                            value="2l"
+                            id="filter-mobile-color-0"
+                            name="color[]"
+                            value="Morning"
                             type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setMorn(!morn)}
                           ></input>
                           <label
-                            for="filter-mobile-size-0"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-mobile-color-0"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
                           >
                             {" "}
-                            2L{" "}
+                            Morning (7 AM - 12 PM)
                           </label>
                         </div>
 
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-size-1"
-                            name="size[]"
-                            value="6l"
+                            id="filter-mobile-color-1"
+                            name="color[]"
+                            value="Noon"
                             type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setNoon(!noon)}
                           ></input>
                           <label
-                            for="filter-mobile-size-1"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-mobile-color-1"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
                           >
-                            {" "}
-                            6L{" "}
+                            Noon (12 PM - 3 PM)
                           </label>
                         </div>
 
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-size-2"
-                            name="size[]"
-                            value="12l"
+                            id="filter-mobile-color-2"
+                            name="color[]"
+                            value="Evening"
                             type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setEve(!evening)}
                           ></input>
                           <label
-                            for="filter-mobile-size-2"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-mobile-color-2"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
                           >
                             {" "}
-                            12L{" "}
+                            Evening (3 PM - 9 PM)
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border-t border-gray-200 px-4 py-6">
+                    <h3 class="-mx-2 -my-3 flow-root">
+                      <button
+                        type="button"
+                        class="px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
+                        aria-controls="filter-section-mobile-0"
+                        aria-expanded="false"
+                      >
+                        <span class="font-medium text-gray-900">
+                          {" "}
+                          Virtual or In-Person{" "}
+                        </span>
+
+                        <span class="ml-6 flex items-center ">
+                          <div onClick={() => setVirtController(true)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div onClick={() => setVirtController(false)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        </span>
+                      </button>
+                    </h3>
+                    <div
+                      class={
+                        virtController
+                          ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"
+                      }
+                      id="filter-section-0"
+                    >
+                      <div class="space-y-4">
+                        <div class="flex items-center">
+                          <input
+                            id="filter-mobile-color-0"
+                            name="color[]"
+                            value="Virtual"
+                            type="checkbox"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setVirtual(!virtual)}
+                          ></input>
+                          <label
+                            for="filter-mobile-color-0"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
+                          >
+                            {" "}
+                            Virtual Tutoring
                           </label>
                         </div>
 
                         <div class="flex items-center">
                           <input
-                            id="filter-mobile-size-3"
-                            name="size[]"
-                            value="18l"
+                            id="filter-color-1"
+                            name="color[]"
+                            value="In-Person"
                             type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setPerson(!person)}
                           ></input>
                           <label
-                            for="filter-mobile-size-3"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
+                            for="filter-color-1"
+                            class="ml-3 min-w-0 flex-1 text-gray-600"
                           >
-                            {" "}
-                            18L{" "}
-                          </label>
-                        </div>
-
-                        <div class="flex items-center">
-                          <input
-                            id="filter-mobile-size-4"
-                            name="size[]"
-                            value="20l"
-                            type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                          ></input>
-                          <label
-                            for="filter-mobile-size-4"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
-                          >
-                            {" "}
-                            20L{" "}
-                          </label>
-                        </div>
-
-                        <div class="flex items-center">
-                          <input
-                            id="filter-mobile-size-5"
-                            name="size[]"
-                            value="40l"
-                            type="checkbox"
-                            checked
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                          ></input>
-                          <label
-                            for="filter-mobile-size-5"
-                            class="ml-3 min-w-0 flex-1 text-gray-500"
-                          >
-                            {" "}
-                            40L{" "}
+                            In-Person Tutoring
                           </label>
                         </div>
                       </div>
@@ -844,9 +998,10 @@ function Sample() {
                 <button
                   type="button"
                   class="p-2 -m-2 ml-4 sm:ml-6 text-gray-400 hover:text-gray-500 lg:hidden"
+                  onClick={()=>setMobileFilter(!mobileFilter)}
                 >
                   <span class="sr-only">Filters</span>
-                  {/* Heroicon name: solid/filter (*/}
+                  
                   <svg
                     class="w-5 h-5"
                     aria-hidden="true"
@@ -884,43 +1039,49 @@ function Sample() {
                           {" "}
                           Days Available{" "}
                         </span>
-                      
 
                         <span class="ml-6 flex items-center ">
-                          <div onClick={()=>setDaysController(true)}>
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                            
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
+                          <div onClick={() => setDaysController(true)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
                           </div>
-                          <div onClick={()=>setDaysController(false)}>
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg></div>
+                          <div onClick={() => setDaysController(false)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
                         </span>
                       </button>
                     </h3>
-                    <div class={daysController?"pt-6 transition ease-out duration-100 opacity-100 scale-100":"pt-6 transition ease-in duration-75 invisible h-0  scale-95"} id="filter-section-0">
+                    <div
+                      class={
+                        daysController
+                          ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"
+                      }
+                      id="filter-section-0"
+                    >
                       <div class="space-y-4">
                         <div class="flex items-center">
                           <input
@@ -1057,47 +1218,50 @@ function Sample() {
                         aria-controls="filter-section-0"
                         aria-expanded="false"
                       >
-                        <span class="font-medium text-gray-900">
-                          {" "}
-                          Subject
-                        </span>
-                      
+                        <span class="font-medium text-gray-900"> Subject</span>
 
                         <span class="ml-6 flex items-center ">
-                          <div onClick={()=>setDaysController(true)}>
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                            
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
+                          <div onClick={() => setSubjectController(true)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
                           </div>
-                          <div onClick={()=>setDaysController(false)}>
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg></div>
+                          <div onClick={() => setSubjectController(false)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
                         </span>
                       </button>
                     </h3>
-                    <div class={daysController?"pt-6 transition ease-out duration-100 opacity-100 scale-100":"pt-6 transition ease-in duration-75 invisible h-0  scale-95"} id="filter-section-0">
+                    <div
+                      class={
+                        subjectController
+                          ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"
+                      }
+                      id="filter-section-0"
+                    >
                       <div class="space-y-4">
                         <div class="flex items-center">
                           <input
@@ -1106,7 +1270,7 @@ function Sample() {
                             value="Monday"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setMon(!monday)}
+                            onClick={() => setMATH(!math)}
                           ></input>
                           <label
                             for="filter-color-0"
@@ -1123,7 +1287,7 @@ function Sample() {
                             value="Tuesday"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setTue(!tuesday)}
+                            onClick={() => setCHEM(!chem)}
                           ></input>
                           <label
                             for="filter-color-1"
@@ -1140,7 +1304,7 @@ function Sample() {
                             value="blue"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setWed(!wednesday)}
+                            onClick={() => setPHYS(!phys)}
                           ></input>
                           <label
                             for="filter-color-2"
@@ -1158,7 +1322,7 @@ function Sample() {
                             value="brown"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setThu(!thursday)}
+                            onClick={() => setBIO(!bio)}
                           ></input>
                           <label
                             for="filter-color-3"
@@ -1176,7 +1340,7 @@ function Sample() {
                             value="green"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setFri(!friday)}
+                            onClick={() => setENG(!eng)}
                           ></input>
                           <label
                             for="filter-color-4"
@@ -1194,14 +1358,13 @@ function Sample() {
                             value="purple"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setSat(!saturday)}
+                            onClick={() => setCS(!cs)}
                           ></input>
                           <label
                             for="filter-color-5"
                             class="ml-3 text-sm text-gray-600"
                           >
-                            {" "}
-                            World Languages{" "}
+                            Computer Science
                           </label>
                         </div>
                         <div class="flex items-center">
@@ -1211,14 +1374,14 @@ function Sample() {
                             value="purple"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setSun(!sunday)}
+                            onClick={() => setUSH(!ush)}
                           ></input>
                           <label
                             for="filter-color-5"
                             class="ml-3 text-sm text-gray-600"
                           >
                             {" "}
-                            History{" "}
+                            U.S. History{" "}
                           </label>
                         </div>
                       </div>
@@ -1236,43 +1399,49 @@ function Sample() {
                           {" "}
                           Times Available{" "}
                         </span>
-                      
 
                         <span class="ml-6 flex items-center ">
-                          <div onClick={()=>setDaysController(true)}>
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                            
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
+                          <div onClick={() => setTimeController(true)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
                           </div>
-                          <div onClick={()=>setDaysController(false)}>
-                          <svg
-                            class="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clip-rule="evenodd"
-                            />
-                          </svg></div>
+                          <div onClick={() => setTimeController(false)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
                         </span>
                       </button>
                     </h3>
-                    <div class={daysController?"pt-6 transition ease-out duration-100 opacity-100 scale-100":"pt-6 transition ease-in duration-75 invisible h-0  scale-95"} id="filter-section-0">
+                    <div
+                      class={
+                        timeController
+                          ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"
+                      }
+                      id="filter-section-0"
+                    >
                       <div class="space-y-4">
                         <div class="flex items-center">
                           <input
@@ -1281,14 +1450,14 @@ function Sample() {
                             value="Monday"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setMon(!monday)}
+                            onClick={() => setMorn(!morn)}
                           ></input>
                           <label
                             for="filter-color-0"
                             class="ml-3 text-sm text-gray-600"
                           >
                             {" "}
-                            Monday{" "}
+                            Morning (7 AM - 12 PM)
                           </label>
                         </div>
 
@@ -1299,13 +1468,13 @@ function Sample() {
                             value="Tuesday"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setTue(!tuesday)}
+                            onClick={() => setNoon(!noon)}
                           ></input>
                           <label
                             for="filter-color-1"
                             class="ml-3 text-sm text-gray-600"
                           >
-                            Tuesday
+                            Noon (12 PM - 3 PM)
                           </label>
                         </div>
 
@@ -1316,85 +1485,107 @@ function Sample() {
                             value="blue"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setWed(!wednesday)}
+                            onClick={() => setEve(!evening)}
                           ></input>
                           <label
                             for="filter-color-2"
                             class="ml-3 text-sm text-gray-600"
                           >
                             {" "}
-                            Wednesday{" "}
+                            Evening (3 PM - 9 PM)
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border-b border-gray-200 py-6">
+                    <h3 class="-my-3 flow-root">
+                      <button
+                        type="button"
+                        class="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
+                        aria-controls="filter-section-0"
+                        aria-expanded="false"
+                      >
+                        <span class="font-medium text-gray-900">
+                          {" "}
+                          Virtual or In-Person{" "}
+                        </span>
+
+                        <span class="ml-6 flex items-center ">
+                          <div onClick={() => setVirtController(true)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div onClick={() => setVirtController(false)}>
+                            <svg
+                              class="h-5 w-5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        </span>
+                      </button>
+                    </h3>
+                    <div
+                      class={
+                        virtController
+                          ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"
+                      }
+                      id="filter-section-0"
+                    >
+                      <div class="space-y-4">
+                        <div class="flex items-center">
+                          <input
+                            id="filter-color-0"
+                            name="color[]"
+                            value="Monday"
+                            type="checkbox"
+                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
+                            onClick={() => setVirtual(!virtual)}
+                          ></input>
+                          <label
+                            for="filter-color-0"
+                            class="ml-3 text-sm text-gray-600"
+                          >
+                            {" "}
+                            Virtual Tutoring
                           </label>
                         </div>
 
                         <div class="flex items-center">
                           <input
-                            id="filter-color-3"
+                            id="filter-color-1"
                             name="color[]"
-                            value="brown"
+                            value="Tuesday"
                             type="checkbox"
                             class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setThu(!thursday)}
+                            onClick={() => setPerson(!person)}
                           ></input>
                           <label
-                            for="filter-color-3"
+                            for="filter-color-1"
                             class="ml-3 text-sm text-gray-600"
                           >
-                            {" "}
-                            Thursday{" "}
-                          </label>
-                        </div>
-
-                        <div class="flex items-center">
-                          <input
-                            id="filter-color-4"
-                            name="color[]"
-                            value="green"
-                            type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setFri(!friday)}
-                          ></input>
-                          <label
-                            for="filter-color-4"
-                            class="ml-3 text-sm text-gray-600"
-                          >
-                            {" "}
-                            Friday{" "}
-                          </label>
-                        </div>
-
-                        <div class="flex items-center">
-                          <input
-                            id="filter-color-5"
-                            name="color[]"
-                            value="purple"
-                            type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setSat(!saturday)}
-                          ></input>
-                          <label
-                            for="filter-color-5"
-                            class="ml-3 text-sm text-gray-600"
-                          >
-                            {" "}
-                            Saturday{" "}
-                          </label>
-                        </div>
-                        <div class="flex items-center">
-                          <input
-                            id="filter-color-5"
-                            name="color[]"
-                            value="purple"
-                            type="checkbox"
-                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 hover:bg-indigo-500  focus:ring-indigo-500"
-                            onClick={() => setSun(!sunday)}
-                          ></input>
-                          <label
-                            for="filter-color-5"
-                            class="ml-3 text-sm text-gray-600"
-                          >
-                            {" "}
-                            Sunday{" "}
+                            In-Person Tutoring
                           </label>
                         </div>
                       </div>
@@ -1404,8 +1595,8 @@ function Sample() {
 
                 {/* Grid*/}
                 <div class="lg:col-span-3">
-                  <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full bg-gradient-to-r from-indigo-500 to-violet-500 overflow-auto h-full">
-                    <div class="grid grid-cols-3 gap-4 p-4 ">
+                  <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full bg-gradient-to-r from-indigo-500 to-violet-500 overflow-auto h-max">
+                    <div class="grid sm:grid-cols-3 grid-cols-2 gap-4 p-4 ">
                       <ListBody />
                     </div>
                   </div>
