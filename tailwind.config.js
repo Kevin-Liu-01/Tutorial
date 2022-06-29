@@ -1,6 +1,9 @@
 module.exports = {
-  content: ["./src/Main.js", "./src/App.js", "./src/Navbar.js", "./src/Sample.js", "./src/Footer.js", "./src/Banner.js","./Leaderboard.js", "./TestDocs.js","./src/Sponsors.js","./src/Staff.js","./src/Portal.js","./src/Retreival.js"],
+  content: ["./src/pages/Main.js", "./src/App.js", "./src/elements/Navbar.js", "./src/pages/Documentation.js", "./src/elements/Footer.js", "./src/elements/Banner.js","./src/pages/FindClient.js", "./src/pages/FindTutor.js","./src/elements/Banner.js","./src/pages/CreateTutor.js","./src/pages/CreateClient.js"],
   theme: {
+    backgroundImage: {
+      'tutorialogo': "url('.//images/TutorialLogo1.jfif')",
+    },
     extend: {},
   },
   plugins: [],
