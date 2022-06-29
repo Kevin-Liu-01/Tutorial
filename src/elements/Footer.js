@@ -221,9 +221,9 @@ function Footer() {
 
       <div class="justify-center text-center text-gray-800 pb-8 bg-slate-100 ">
         <div class="mb-3 justify-center">
-          <div class="text-gray-800">© 2022 Copyright: OMMC™</div>
+          <div class="text-gray-800">© 2022 </div>
 
-          <p class="text-gray-800 text-xs mt-3 ">Made by Kevin Liu and Vinay Singamsetty for OMMC</p>
+          <p class="text-gray-800 text-xs mt-3 ">Made by Kevin Liu </p>
         </div>
       </div>
     </footer>

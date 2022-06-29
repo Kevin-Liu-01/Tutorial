@@ -8,7 +8,7 @@ function Sample() {
 
   //menu states
   const [menuState, setMenuState] = useState(false);
-  const [mobileFilter, setMobileFilter] = useState(false);
+  const [mobileFilter, setMobileFilter] = useState(true);
   const [daysController, setDaysController] = useState(true);
   const [subjectController, setSubjectController]=useState(true);
   const [virtController, setVirtController]=useState(true);
@@ -53,8 +53,8 @@ function Sample() {
   const TutorComponent = (props) => {
     return (
       <div>
-        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-          <div class="px-4 py-5 sm:px-6">
+        <div class="bg-white shadow-lg overflow-hidden rounded-lg ">
+          <div class="px-4 py-5 sm:px-6 shadow-lg ">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
               {props.data.name.toString()}
             </h3>
@@ -223,25 +223,25 @@ function Sample() {
     return initialList
       .filter(
         (tutor) =>
-          (monday && tutor.mon_status == true) ||
-          (tuesday && tutor.tues_status == true) ||
-          (wednesday && tutor.weds_status == true) ||
-          (thursday && tutor.thurs_status == true) ||
-          (friday && tutor.fri_status == true) ||
-          (saturday && tutor.sat_status == true) ||
-          (sunday && tutor.sun_status == true) ||
-          (math && tutor.subj_status == "Math") ||
-          (bio && tutor.subj_status == "Biology") ||
-          (cs && tutor.subj_status == "Computer Science") ||
-          (ush && tutor.subj_status == "U.S. History") ||
-          (phys && tutor.subj_status == "Physics") ||
-          (chem && tutor.subj_status == "Chemistry") ||
-          (eng && tutor.subj_status == "English") ||
-          (morn && tutor.morn_status == true) ||
-          (noon && tutor.noon_status == true) ||
-          (evening && tutor.evening_status == true) ||
-          (virtual && tutor.virt_status == false) ||
-          (person && tutor.virt_status == true)
+          (monday && tutor.mon_status === true) ||
+          (tuesday && tutor.tues_status === true) ||
+          (wednesday && tutor.weds_status === true) ||
+          (thursday && tutor.thurs_status === true) ||
+          (friday && tutor.fri_status === true) ||
+          (saturday && tutor.sat_status === true) ||
+          (sunday && tutor.sun_status === true) ||
+          (math && tutor.subj_status === "Math") ||
+          (bio && tutor.subj_status === "Biology") ||
+          (cs && tutor.subj_status === "Computer Science") ||
+          (ush && tutor.subj_status === "U.S. History") ||
+          (phys && tutor.subj_status === "Physics") ||
+          (chem && tutor.subj_status === "Chemistry") ||
+          (eng && tutor.subj_status === "English") ||
+          (morn && tutor.morn_status === true) ||
+          (noon && tutor.noon_status === true) ||
+          (evening && tutor.evening_status === true) ||
+          (virtual && tutor.virt_status === false) ||
+          (person && tutor.virt_status === true)
       )
 
       .map((currentTutor) => {
@@ -323,13 +323,13 @@ function Sample() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="2"
+                      strokeWidth="2"
                       stroke="currentColor"
                       aria-hidden="true"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
@@ -360,9 +360,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -375,9 +375,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -536,9 +536,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -551,9 +551,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -716,9 +716,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -731,9 +731,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -827,9 +827,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -842,9 +842,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -929,9 +929,9 @@ function Sample() {
                         aria-hidden="true"
                       >
                         <path
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                           d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clip-rule="evenodd"
+                          clipRule="evenodd"
                         />
                       </svg>
                     </button>
@@ -945,7 +945,7 @@ function Sample() {
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="menu-button"
-                    tabindex="-1"
+                    tabIndex="-1"
                   >
                     <div class="py-1" role="none">
                       {/*
@@ -958,7 +958,7 @@ function Sample() {
                         onClick={() => sortAscending()}
                         class="text-gray-500 hover:bg-gray-100 hover:text-black block px-4 py-2 text-sm"
                         role="menuitem"
-                        tabindex="-1"
+                        tabIndex="-1"
                         id="menu-item-1"
                       >
                         {" "}
@@ -969,7 +969,7 @@ function Sample() {
                         onClick={() => sortDescending()}
                         class="text-gray-500 hover:bg-gray-100 hover:text-black block px-4 py-2 text-sm"
                         role="menuitem"
-                        tabindex="-1"
+                        tabIndex="-1"
                         id="menu-item-2"
                       >
                         {" "}
@@ -981,7 +981,7 @@ function Sample() {
 
                 <button
                   type="button"
-                  class="p-2 -m-2 ml-5 sm:ml-7 text-gray-400 hover:text-gray-500"
+                  class="p-2 -m-2 l-3 ml-2 mr-2 text-gray-400 hover:text-gray-500"
                 >
                   <span class="sr-only">View grid</span>
                   {/* Heroicon name: solid/view-grid */}
@@ -997,7 +997,7 @@ function Sample() {
                 </button>
                 <button
                   type="button"
-                  class="p-2 -m-2 ml-4 sm:ml-6 text-gray-400 hover:text-gray-500 lg:hidden"
+                  class="p-2 -m-2 sm:ml-6 text-gray-400 hover:text-gray-500 lg:hidden"
                   onClick={()=>setMobileFilter(!mobileFilter)}
                 >
                   <span class="sr-only">Filters</span>
@@ -1010,9 +1010,9 @@ function Sample() {
                     fill="currentColor"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                 </button>
@@ -1050,9 +1050,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -1065,9 +1065,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -1230,9 +1230,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -1245,9 +1245,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -1410,9 +1410,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -1425,9 +1425,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -1521,9 +1521,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
@@ -1536,9 +1536,9 @@ function Sample() {
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
