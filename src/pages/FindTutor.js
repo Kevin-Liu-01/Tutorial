@@ -11,9 +11,9 @@ function FindTutor() {
   const [menuState, setMenuState] = useState(false);
   const [mobileFilter, setMobileFilter] = useState(true);
   const [daysController, setDaysController] = useState(true);
-  const [subjectController, setSubjectController]=useState(true);
-  const [virtController, setVirtController]=useState(true);
-  const [timeController, setTimeController]=useState(true);
+  const [subjectController, setSubjectController] = useState(true);
+  const [virtController, setVirtController] = useState(true);
+  const [timeController, setTimeController] = useState(true);
 
   //Day states
   const [monday, setMon] = useState(false);
@@ -52,19 +52,18 @@ function FindTutor() {
     setInitialList(tempArray);
   }
 
-  function handleMenu(){
-    if(gridNum==3){
-      setGridNum(2)
-    }
-    else{
-      setGridNum(3)
+  function handleMenu() {
+    if (gridNum == 3) {
+      setGridNum(2);
+    } else {
+      setGridNum(3);
     }
   }
 
   const TutorComponent = (props) => {
     return (
-      <div>
-        <div class="bg-white shadow-lg overflow-hidden rounded-lg ">
+      <div class="flex ">
+        <div class="bg-white shadow-lg grow overflow-hidden rounded-lg grow">
           <div class="px-4 py-5 sm:px-6 shadow-lg ">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
               {props.data.name.toString()}
@@ -72,9 +71,12 @@ function FindTutor() {
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
               Personal details and contact info.
             </p>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+              ZIP Code: {props.data.zip}
+            </p>
           </div>
           <div class="border-t border-gray-200">
-            <dl>
+            <dl class="grow">
               <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Meeting</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -194,9 +196,9 @@ function FindTutor() {
                   Evening
                 </div>
               </div>
-              <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">About</dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6  grow">
+                <dt class="text-sm font-medium text-gray-500 ">About</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ">
                   {props.data.description}
                 </dd>
               </div>
@@ -316,7 +318,11 @@ function FindTutor() {
       <div class="bg-white">
         <div>
           {/*Mobile filter dialog*/}
-          <div class={mobileFilter?"invisible":"relative z-40 lg:hidden"} role="dialog" aria-modal="true">
+          <div
+            class={mobileFilter ? "invisible" : "relative z-40 lg:hidden"}
+            role="dialog"
+            aria-modal="true"
+          >
             <div class="fixed inset-0 bg-black bg-opacity-25"></div>
 
             <div class="fixed inset-0 flex z-40">
@@ -325,7 +331,7 @@ function FindTutor() {
                   <h2 class="text-lg font-medium text-gray-900">Filters</h2>
                   <button
                     type="button"
-                    onClick={()=>setMobileFilter(!mobileFilter)}
+                    onClick={() => setMobileFilter(!mobileFilter)}
                     class="-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400"
                   >
                     <span class="sr-only">Close menu</span>
@@ -362,7 +368,7 @@ function FindTutor() {
                           Days Available{" "}
                         </span>
                         <span class="ml-6 flex items-center">
-                        <div onClick={() => setDaysController(true)}>
+                          <div onClick={() => setDaysController(true)}>
                             <svg
                               class="h-5 w-5"
                               xmlns="http://www.w3.org/2000/svg"
@@ -395,9 +401,14 @@ function FindTutor() {
                         </span>
                       </button>
                     </h3>
-                    <div class={daysController
+                    <div
+                      class={
+                        daysController
                           ? "pt-6 transition ease-out duration-100 opacity-100 scale-100"
-                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"} id="filter-section-0">
+                          : "pt-6 transition ease-in duration-75 invisible h-0  scale-95"
+                      }
+                      id="filter-section-0"
+                    >
                       <div class="space-y-4">
                         <div class="flex items-center">
                           <input
@@ -993,7 +1004,7 @@ function FindTutor() {
                 <button
                   type="button"
                   class="p-2 -m-2 l-3 ml-2 mr-2 text-gray-400 hover:text-gray-500"
-                  onClick={()=>handleMenu()}
+                  onClick={() => handleMenu()}
                 >
                   <span class="sr-only">View grid</span>
                   {/* Heroicon name: solid/view-grid */}
@@ -1010,10 +1021,10 @@ function FindTutor() {
                 <button
                   type="button"
                   class="p-2 -m-2 sm:ml-6 text-gray-400 hover:text-gray-500 lg:hidden"
-                  onClick={()=>setMobileFilter(!mobileFilter)}
+                  onClick={() => setMobileFilter(!mobileFilter)}
                 >
                   <span class="sr-only">Filters</span>
-                  
+
                   <svg
                     class="w-5 h-5"
                     aria-hidden="true"
@@ -1608,7 +1619,13 @@ function FindTutor() {
                 {/* Grid*/}
                 <div class="lg:col-span-3">
                   <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full bg-gradient-to-r from-indigo-500 to-violet-500 overflow-auto h-max">
-                    <div class={gridNum==2?"grid sm:grid-cols-2 grid-cols-1 gap-4 p-4 ":"grid sm:grid-cols-3 grid-cols-2 gap-4 p-4 "}>
+                    <div
+                      class={
+                        gridNum == 2
+                          ? "grid sm:grid-cols-2 grid-cols-1 gap-4 p-4 "
+                          : "grid sm:grid-cols-3 grid-cols-2 gap-4 p-4 "
+                      }
+                    >
                       <ListBody />
                     </div>
                   </div>
