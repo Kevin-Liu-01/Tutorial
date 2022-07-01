@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import Constants from "./config";
 import axios from "axios";
 
-function Sample() {
+function FindTutor() {
   const [initialList, setInitialList] = useState([]);
+  const [gridNum, setGridNum] = useState(3);
 
   //menu states
   const [menuState, setMenuState] = useState(false);
@@ -50,6 +51,16 @@ function Sample() {
     setMenuState(false);
     setInitialList(tempArray);
   }
+
+  function handleMenu(){
+    if(gridNum==3){
+      setGridNum(2)
+    }
+    else{
+      setGridNum(3)
+    }
+  }
+
   const TutorComponent = (props) => {
     return (
       <div>
@@ -982,6 +993,7 @@ function Sample() {
                 <button
                   type="button"
                   class="p-2 -m-2 l-3 ml-2 mr-2 text-gray-400 hover:text-gray-500"
+                  onClick={()=>handleMenu()}
                 >
                   <span class="sr-only">View grid</span>
                   {/* Heroicon name: solid/view-grid */}
@@ -1596,7 +1608,7 @@ function Sample() {
                 {/* Grid*/}
                 <div class="lg:col-span-3">
                   <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full bg-gradient-to-r from-indigo-500 to-violet-500 overflow-auto h-max">
-                    <div class="grid sm:grid-cols-3 grid-cols-2 gap-4 p-4 ">
+                    <div class={gridNum==2?"grid sm:grid-cols-2 grid-cols-1 gap-4 p-4 ":"grid sm:grid-cols-3 grid-cols-2 gap-4 p-4 "}>
                       <ListBody />
                     </div>
                   </div>
@@ -1610,4 +1622,4 @@ function Sample() {
   );
 }
 
-export default Sample;
+export default FindTutor;

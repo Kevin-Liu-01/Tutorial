@@ -1,15 +1,10 @@
 import "../App.css";
 
-function Sample() {
+function Creator() {
 
   return (
     <div className=" min-h-screen">
-      <header className="bg-white shadow-lg bg-slate-100">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">
-          <h1 className="text-3xl font-bold text-gray-900 ">Sample Problems</h1>
-        </div>
-      </header>
-      <main className="bg-slate-200">
+      <main className="bg-slate-600">
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
   <div class="px-4 py-5 sm:px-6">
     <h3 class="text-lg leading-6 font-medium text-gray-900">Applicant Information</h3>
@@ -76,4 +71,4 @@ function Sample() {
   );
 }
 
-export default Sample;
+export default Creator;

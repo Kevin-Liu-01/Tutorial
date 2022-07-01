@@ -6,7 +6,7 @@ import FindClient from './pages/FindClient.js'
 import CreateClient from './pages/CreateClient.js'
 import CreateTutor from './pages/CreateTutor.js'
 import Documentation from './pages/Documentation.js'
-import Creator from './pages/Documentation.js'
+import Creator from './pages/Creator.js'
 
 
 import { Routes, Route } from "react-router-dom";
