@@ -6,6 +6,7 @@ import FindClient from './pages/FindClient.js'
 import CreateClient from './pages/CreateClient.js'
 import CreateTutor from './pages/CreateTutor.js'
 import Documentation from './pages/Documentation.js'
+import Creator from './pages/Documentation.js'
 
 
 import { Routes, Route } from "react-router-dom";
@@ -23,6 +24,7 @@ function App() {
       <Route path="create-tutor" element={<CreateTutor />}></Route>
       <Route path="create-client" element={<CreateClient />}></Route>
       <Route path="documentation" element={<Documentation/>}></Route>
+      <Route path="create-listing" element={<Creator/>}></Route>
 
 
       </Routes> 
