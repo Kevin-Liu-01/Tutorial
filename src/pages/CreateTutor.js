@@ -2,6 +2,8 @@ import "../App.css";
 import axios from "axios";
 import Constants from "./config.js";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../elements/Navbar";
 
 function CreateTutor(props) {
   //Day states
@@ -26,12 +28,14 @@ function CreateTutor(props) {
   const [evening, setEve] = useState(false);
   //virtual or in person states
   const [virtual, setVirtual] = useState(false);
-  console.log(subj);
-  // This function will handle the submission.    
+
+  console.log(props);
+  // This function will handle the submission.
+  let navigate = useNavigate();
 
   async function onSubmit(e) {
     e.preventDefault();
-    const name=firstName+" "+lastName
+    const name = firstName + " " + lastName;
     // When post request is sent to the create url, axios will add a new tutor(newperson) to the database.
     const newTutor = {
       name: name,
@@ -56,18 +60,24 @@ function CreateTutor(props) {
     axios.post(`${Constants.SERVER_HOST}/tutor/add`, newTutor).then((res) => {
       console.log(res.data);
     });
-    console.log("new person has been crated");
+    console.log("New tutor has been created.");
 
-    console.log("Timer begin");
+    console.log("Timer begins.");
 
     await new Promise((resolve) => setTimeout(resolve, 4000));
-
+    navigate("/find-a-tutor");
 
     // We will empty the state after posting the data to the database
   }
   return (
     <div className=" min-h-screen bg-gray-100">
+      <Navbar page="Creator" />
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="relative z-10 flex items-baseline justify-between pt-6 pb-6 mb-7 border-b border-gray-300">
+          <h1 class="text-4xl max-w-7xl font-extrabold tracking-tight text-gray-900">
+            Create a Tutor
+          </h1>
+        </div>
         <div class=" ">
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
@@ -82,7 +92,7 @@ function CreateTutor(props) {
               </div>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-              <form >
+              <form>
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                   <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <div class="grid grid-cols-6 gap-6">
@@ -596,13 +606,13 @@ function CreateTutor(props) {
                               name="Morning"
                               type="checkbox"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                              onChange={() => setMorn(!morn)}
                             />
                           </div>
                           <div class="ml-3 text-sm">
                             <label
                               for="Morning"
                               class="font-medium text-gray-700"
-                              onChange={() => setMorn(!morn)}
                             >
                               Morning
                             </label>
@@ -670,7 +680,6 @@ function CreateTutor(props) {
                               type="checkbox"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={() => setMon(!monday)}
-
                             />
                           </div>
                           <div class="ml-3 text-sm">
@@ -690,7 +699,6 @@ function CreateTutor(props) {
                               type="checkbox"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={() => setTue(!tuesday)}
-
                             />
                           </div>
                           <div class="ml-3 text-sm">
@@ -710,7 +718,6 @@ function CreateTutor(props) {
                               type="checkbox"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={() => setWed(!wednesday)}
-
                             />
                           </div>
                           <div class="ml-3 text-sm">
@@ -730,7 +737,6 @@ function CreateTutor(props) {
                               type="checkbox"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={() => setThu(!thursday)}
-
                             />
                           </div>
                           <div class="ml-3 text-sm">
@@ -750,7 +756,6 @@ function CreateTutor(props) {
                               type="checkbox"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={() => setFri(!friday)}
-
                             />
                           </div>
                           <div class="ml-3 text-sm">
@@ -770,7 +775,6 @@ function CreateTutor(props) {
                               type="checkbox"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={() => setSat(!saturday)}
-
                             />
                           </div>
                           <div class="ml-3 text-sm">
@@ -790,7 +794,6 @@ function CreateTutor(props) {
                               type="checkbox"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={() => setSun(!sunday)}
-
                             />
                           </div>
                           <div class="ml-3 text-sm">

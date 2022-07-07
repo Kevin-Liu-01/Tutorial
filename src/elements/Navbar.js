@@ -4,22 +4,22 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "For Tutors", href: "/find-a-tutor", current: true },
-  { name: "For Parents", href: "/documentation", current: true },
-  
+  { name: "Home", href: "/", page: "Home" },
+  { name: "Find Tutors", href: "/find-a-tutor", page: "FindTutor" },
+  { name: "Find Clients", href: "/find-a-client", page: "FindClient" },
+  { name: "Create a Listing", href: "/create-listing", page: "Creator" },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function Navbar() {
+function Navbar(props) {
   return (
-    <Disclosure as="nav" className="bg-gray-900 border border-gray-900 border-b-red-700 border-b-8">
+    <Disclosure as="nav" className="bg-white drop-shadow-md  ">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 border-b-indigo-500">
+          <div className="max-w-7xl mx-auto px-2 sm:px-1 lg:px-2 border-b-indigo-500">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -33,19 +33,19 @@ function Navbar() {
                 </Disclosure.Button>
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex-shrink-0 flex items-center">
+                <a href="/" className="flex-shrink-0 flex items-center">
                   <img
                     className="hidden lg:block h-10 w-auto"
-                    src="https://cdn.discordapp.com/attachments/760189295067004962/917951890690547712/ommc_fixup.png"
-                    alt="OMMCLogo"
+                    src="/images/TutorialNavbarLogo.png"
+                    alt="TutorialLogo"
                     href="/"
                   />
                   <img
                     className="block lg:hidden h-10 w-auto"
-                    src="https://cdn.discordapp.com/attachments/760189295067004962/917951890690547712/ommc_fixup.png"
-                    alt="OMMCLogo"
+                    src="/images/TutorialNavbarLogo.png"
+                    alt="TutorialLogo"
                   />
-                </div>
+                </a>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -53,12 +53,11 @@ function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
-                            ? "hover:bg-gray-800 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
+                          item.page === props.page
+                            ? "hover:bg-gray-300 text-gray-700 border border-t-0 border-l-0 border-r-0 border-b-4 border-indigo-500"
+                            : "text-gray-400 hover:bg-gray-300 hover:text-gray-700",
+                          "px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
@@ -76,12 +75,11 @@ function Navbar() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current
-                      ? "hover:bg-gray-800 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
+                    item.page === props.page
+                      ? "hover:bg-gray-300 text-gray-700 w-[30%] border border-t-0 border-l-0 border-r-0 border-b-4 border-indigo-500"
+                      : "text-gray-400 hover:bg-gray-300 hover:text-gray-700",
+                    "block px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -93,6 +91,5 @@ function Navbar() {
     </Disclosure>
   );
 }
-
 
 export default Navbar;

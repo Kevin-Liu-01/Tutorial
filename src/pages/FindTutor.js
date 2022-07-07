@@ -2,6 +2,7 @@ import "../App.css";
 import React, { useEffect, useState } from "react";
 import Constants from "./config";
 import axios from "axios";
+import Navbar from "../elements/Navbar";
 
 function FindTutor() {
   const [initialList, setInitialList] = useState([]);
@@ -223,8 +224,8 @@ function FindTutor() {
       });
     } else {
       return (
-        <div class="col-span-3 text-center mt-96">
-          <div class=" font-extrabold text-2xl">Error: </div>
+        <div class="col-span-3 text-center mt-96 text-white">
+          <div class=" font-extrabold text-2xl">Error 01: </div>
           <div class="text-xl ">
             Please wait for the server to load our tutors. Thank you!
           </div>
@@ -315,7 +316,8 @@ function FindTutor() {
 
   return (
     <div className=" min-h-screen">
-      <div class="bg-white">
+      <Navbar page="FindTutor" />
+      <div class="bg-gray-50 ">
         <div>
           {/*Mobile filter dialog*/}
           <div
@@ -359,7 +361,7 @@ function FindTutor() {
                     <h3 class="-mx-2 -my-3 flow-root">
                       <button
                         type="button"
-                        class="px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
+                        class="px-2 py-3 w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
                         aria-controls="filter-section-mobile-0"
                         aria-expanded="false"
                       >
@@ -542,7 +544,7 @@ function FindTutor() {
                     <h3 class="-mx-2 -my-3 flow-root">
                       <button
                         type="button"
-                        class="px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
+                        class="px-2 py-3 w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
                         aria-controls="filter-section-mobile-0"
                         aria-expanded="false"
                       >
@@ -719,7 +721,7 @@ function FindTutor() {
                     <h3 class="-mx-2 -my-3 flow-root">
                       <button
                         type="button"
-                        class="px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
+                        class="px-2 py-3 w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
                         aria-controls="filter-section-mobile-0"
                         aria-expanded="false"
                       >
@@ -830,7 +832,7 @@ function FindTutor() {
                     <h3 class="-mx-2 -my-3 flow-root">
                       <button
                         type="button"
-                        class="px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
+                        class="px-2 py-3 w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
                         aria-controls="filter-section-mobile-0"
                         aria-expanded="false"
                       >
@@ -926,7 +928,7 @@ function FindTutor() {
 
           {/*Browser*/}
           <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative z-10 flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
+            <div class="relative z-10 flex items-baseline justify-between pt-12 pb-6 border-b border-gray-300">
               <h1 class="text-4xl font-extrabold tracking-tight text-gray-900">
                 Find a Tutor
               </h1>
@@ -1054,7 +1056,7 @@ function FindTutor() {
                     <h3 class="-my-3 flow-root">
                       <button
                         type="button"
-                        class="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
+                        class="py-3 w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
                         aria-controls="filter-section-0"
                         aria-expanded="false"
                       >
@@ -1237,7 +1239,7 @@ function FindTutor() {
                     <h3 class="-my-3 flow-root">
                       <button
                         type="button"
-                        class="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
+                        class="py-3 w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
                         aria-controls="filter-section-0"
                         aria-expanded="false"
                       >
@@ -1414,7 +1416,7 @@ function FindTutor() {
                     <h3 class="-my-3 flow-root">
                       <button
                         type="button"
-                        class="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
+                        class="py-3 w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
                         aria-controls="filter-section-0"
                         aria-expanded="false"
                       >
@@ -1525,7 +1527,7 @@ function FindTutor() {
                     <h3 class="-my-3 flow-root">
                       <button
                         type="button"
-                        class="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
+                        class="py-3 w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
                         aria-controls="filter-section-0"
                         aria-expanded="false"
                       >
@@ -1618,10 +1620,10 @@ function FindTutor() {
 
                 {/* Grid*/}
                 <div class="lg:col-span-3">
-                  <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full bg-gradient-to-r from-indigo-500 to-violet-500 overflow-auto h-max">
+                  <div class="border-4 border-dashed border-gray-200 rounded-lg h-[800px] lg:h-[1140px] bg-gradient-to-r from-indigo-500 to-violet-500 overflow-auto ">
                     <div
                       class={
-                        gridNum == 2
+                        gridNum === 2
                           ? "grid sm:grid-cols-2 grid-cols-1 gap-4 p-4 "
                           : "grid sm:grid-cols-3 grid-cols-2 gap-4 p-4 "
                       }
