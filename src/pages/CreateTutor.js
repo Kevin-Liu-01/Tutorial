@@ -34,6 +34,8 @@ function CreateTutor(props) {
   let navigate = useNavigate();
 
   async function onSubmit(e) {
+    if (firstName === "") {
+    }
     e.preventDefault();
     const name = firstName + " " + lastName;
     // When post request is sent to the create url, axios will add a new tutor(newperson) to the database.
@@ -109,6 +111,7 @@ function CreateTutor(props) {
                           id="first-name"
                           autocomplete="given-name"
                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          required
                           onChange={() =>
                             setFirst(
                               document.getElementById("first-name").value
@@ -130,6 +133,7 @@ function CreateTutor(props) {
                           id="last-name"
                           autocomplete="family-name"
                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          required
                           onChange={() =>
                             setLast(document.getElementById("last-name").value)
                           }
@@ -225,18 +229,16 @@ function CreateTutor(props) {
                         <div class="mt-4 space-y-4">
                           <div class="flex items-center">
                             <input
-                              id="Mathematics"
+                              id="Math"
                               name="Subjects"
                               type="radio"
                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                               onChange={() =>
-                                setSubj(
-                                  document.getElementById("Mathematics").id
-                                )
+                                setSubj(document.getElementById("Math").id)
                               }
                             />
                             <label
-                              for="Mathematics"
+                              for="Math"
                               class="ml-3 block text-sm font-medium text-gray-700"
                             >
                               {" "}

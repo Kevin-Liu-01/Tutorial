@@ -54,7 +54,7 @@ function FindClient() {
   }
 
   function handleMenu() {
-    if (gridNum == 3) {
+    if (gridNum === 3) {
       setGridNum(2);
     } else {
       setGridNum(3);
@@ -317,7 +317,7 @@ function FindClient() {
   return (
     <div className=" min-h-screen">
       <Navbar page="FindClient" />
-      <div class="bg-gray-50 ">
+      <div class="bg-gray-100 ">
         <div>
           {/*Mobile filter dialog*/}
           <div
@@ -978,7 +978,7 @@ function FindClient() {
                   Selected: "font-medium text-gray-900", Not Selected: "text-gray-500"
                 */}
 
-                      <a
+                      <button
                         onClick={() => sortAscending()}
                         class="text-gray-500 hover:bg-gray-100 hover:text-black block px-4 py-2 text-sm"
                         role="menuitem"
@@ -987,9 +987,9 @@ function FindClient() {
                       >
                         {" "}
                         Rate/Hour: Low to High{" "}
-                      </a>
+                      </button>
 
-                      <a
+                      <button
                         onClick={() => sortDescending()}
                         class="text-gray-500 hover:bg-gray-100 hover:text-black block px-4 py-2 text-sm"
                         role="menuitem"
@@ -998,7 +998,7 @@ function FindClient() {
                       >
                         {" "}
                         Rate/Hour: High to Low{" "}
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>

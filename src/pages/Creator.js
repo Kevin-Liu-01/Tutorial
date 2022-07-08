@@ -4,7 +4,7 @@ import Navbar from "../elements/Navbar";
 
 function Creator() {
   return (
-    <div className="min-h-screen bg-slate-200">
+    <div className="min-h-screen bg-gray-100">
       <Navbar page="Creator" />
       <main className="">
         <div class="py-12 ">
@@ -25,7 +25,7 @@ function Creator() {
                     <div class="m-4">
                       <a
                         href="/create-tutor"
-                        class="absolute flex items-center justify-center h-12 w-12 rounded-md hover:bg-indigo-500 text-indigo-200  hover:text-indigo-50 bg-white transition duration-150"
+                        class="absolute flex items-center justify-center h-12 w-12 rounded-md hover:bg-indigo-500 text-indigo-300  hover:text-indigo-50 bg-indigo-100 transition duration-150"
                       >
                         <CheckIcon />
                       </a>
@@ -44,7 +44,7 @@ function Creator() {
                     <div class="m-4">
                       <a
                         href="/create-client"
-                        class="absolute flex items-center justify-center h-12 w-12 rounded-md hover:bg-indigo-500 text-indigo-200  hover:text-indigo-50 bg-white transition duration-150"
+                        class="absolute flex items-center justify-center h-12 w-12 rounded-md hover:bg-indigo-500 text-indigo-300  hover:text-indigo-50 bg-indigo-100 transition duration-150"
                       >
                         <CheckIcon />
                       </a>
