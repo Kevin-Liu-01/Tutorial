@@ -9,7 +9,7 @@ const navigation = [
   { name: "Create a Listing", href: "/create-listing", page: "Creator" },
 ];
 
-function Main(props) {
+function Main() {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
@@ -158,7 +158,7 @@ function Main(props) {
         </div>
       </div>
       <div className="bg-gray-100">
-        <div className="flex max-w-7xl mx-auto  grid grid-cols-1 md:grid-cols-2">
+        <div className=" max-w-7xl mx-auto  grid grid-cols-1 md:grid-cols-2">
           <div className="flex drop-shadow-lg md:my-10 mt-10 place-content-center">
             <a href="/find-a-tutor" className="relative w-[70%]">
               <img
@@ -169,10 +169,10 @@ function Main(props) {
           </div>
 
           <div className=" place-content-center mt-20 mb-10 mx-10 md:mx-0">
-            <p className=" text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <p className=" text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl text-center md:text-left">
               How does it work?
             </p>
-            <p className="mt-4 max-w-5xl text-xl text-gray-500 ">
+            <p className="mt-4 max-w-5xl text-xl text-gray-500 text-center md:text-left ">
               Simply upload a listing with your details onto Tutorial. Your
               listing will be able to be viewed by anyone seeking your services.
             </p>

@@ -64,7 +64,7 @@ function FindTutor() {
   const TutorComponent = (props) => {
     return (
       <div class="flex ">
-        <div class="bg-gray-50 shadow-lg grow overflow-hidden rounded-lg grow">
+        <div class="bg-gray-50 shadow-lg overflow-hidden rounded-lg grow">
           <div class="px-4 py-5 sm:px-6 shadow-lg bg-white">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
               {props.data.name.toString()}
@@ -1624,8 +1624,8 @@ function FindTutor() {
                     <div
                       class={
                         gridNum === 2
-                          ? "grid sm:grid-cols-2 grid-cols-1 gap-4 p-4 "
-                          : "grid sm:grid-cols-3 grid-cols-2 gap-4 p-4 "
+                          ? "grid grid-cols-2 gap-4 p-4 "
+                          : "grid sm:grid-cols-3 grid-cols-1 gap-4 p-4 "
                       }
                     >
                       <ListBody />

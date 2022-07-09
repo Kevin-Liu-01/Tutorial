@@ -9,7 +9,7 @@ function Creator() {
       <main className="">
         <div class="py-12 ">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
+            <div class="ml-6 md:ml-0 lg:text-center">
               <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">
                 Create a listing
               </h2>
@@ -19,7 +19,7 @@ function Creator() {
             </div>
 
             <div class="mt-10 ">
-              <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 ">
+              <dl class="md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 ">
                 <div class="relative py-4 hover:py-2 ease-out hover:ease-out duration-300">
                   <div class="m-4 bg-white shadow-lg border rounded-lg">
                     <div class="m-4">
