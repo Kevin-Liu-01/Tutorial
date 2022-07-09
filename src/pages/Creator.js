@@ -9,7 +9,7 @@ function Creator() {
       <main className="">
         <div class="py-12 ">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="ml-6 md:ml-0 lg:text-center">
+            <div class="ml-6 mr-6 md:mr-0 md:ml-0 lg:text-center">
               <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">
                 Create a listing
               </h2>
