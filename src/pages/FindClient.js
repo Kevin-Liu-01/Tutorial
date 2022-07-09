@@ -64,8 +64,8 @@ function FindClient() {
   const TutorComponent = (props) => {
     return (
       <div class="flex ">
-        <div class="bg-white shadow-lg grow overflow-hidden rounded-lg grow">
-          <div class="px-4 py-5 sm:px-6 shadow-lg ">
+        <div class="bg-gray-50 shadow-lg grow overflow-hidden rounded-lg grow">
+          <div class="px-4 py-5 sm:px-6 shadow-lg bg-white">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
               {props.data.name.toString()}
             </h3>
@@ -302,10 +302,10 @@ function FindClient() {
   // This method will get the data from the database.
   useEffect(() => {
     axios
-      .get(`${Constants.SERVER_HOST}/tutor`)
+      .get(`${Constants.SERVER_HOST}/client`)
       .then((response) => {
         console.log(
-          `/tutor/ returned response from: ${Constants.SERVER_HOST}/tutor/`
+          `/client/ returned response from: ${Constants.SERVER_HOST}/client/`
         );
         setInitialList(response.data);
       })

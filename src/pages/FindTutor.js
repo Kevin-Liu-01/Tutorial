@@ -64,8 +64,8 @@ function FindTutor() {
   const TutorComponent = (props) => {
     return (
       <div class="flex ">
-        <div class="bg-white shadow-lg grow overflow-hidden rounded-lg grow">
-          <div class="px-4 py-5 sm:px-6 shadow-lg ">
+        <div class="bg-gray-50 shadow-lg grow overflow-hidden rounded-lg grow">
+          <div class="px-4 py-5 sm:px-6 shadow-lg bg-white">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
               {props.data.name.toString()}
             </h3>

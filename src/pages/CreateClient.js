@@ -36,8 +36,8 @@ function CreateClient(props) {
   async function onSubmit(e) {
     e.preventDefault();
     const name = firstName + " " + lastName;
-    // When post request is sent to the create url, axios will add a new tutor(newperson) to the database.
-    const newTutor = {
+    // When post request is sent to the create url, axios will add a new client(newclient) to the database.
+    const newClient = {
       name: name,
       mon_status: monday,
       tues_status: tuesday,
@@ -57,15 +57,15 @@ function CreateClient(props) {
       zip: zip,
     };
 
-    axios.post(`${Constants.SERVER_HOST}/tutor/add`, newTutor).then((res) => {
+    axios.post(`${Constants.SERVER_HOST}/client/add`, newClient).then((res) => {
       console.log(res.data);
     });
-    console.log("New tutor has been created.");
+    console.log("New client has been created.");
 
     console.log("Timer begins.");
 
     await new Promise((resolve) => setTimeout(resolve, 4000));
-    navigate("/find-a-tutor");
+    navigate("/find-a-client");
 
     // We will empty the state after posting the data to the database
   }
@@ -146,7 +146,7 @@ function CreateClient(props) {
                         <div class="mt-1 flex rounded-md shadow-sm">
                           <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                             {" "}
-                            Find me at:{" "}
+                            Contact me at:{" "}
                           </span>
                           <input
                             type="text"
@@ -166,7 +166,7 @@ function CreateClient(props) {
                           class="block text-sm font-medium text-gray-700"
                         >
                           {" "}
-                          Rate{" "}
+                          Preferred Rate{" "}
                         </label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                           <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
@@ -202,7 +202,7 @@ function CreateClient(props) {
                           name="Desc"
                           rows="3"
                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                          placeholder="What do you want others to know about you or your services?"
+                          placeholder="What kind of tutor are you looking for? Be descriptive."
                           onChange={() =>
                             setDesc(document.getElementById("Desc").value)
                           }
@@ -219,8 +219,7 @@ function CreateClient(props) {
                           Subject
                         </legend>
                         <p class="text-sm text-gray-500">
-                          Select what subject you are willing to offer tutoring
-                          in.
+                          Select what subject you require a tutor for.
                         </p>
                         <div class="mt-4 space-y-4">
                           <div class="flex items-center">
@@ -362,7 +361,7 @@ function CreateClient(props) {
                           Virtual/In-Person
                         </legend>
                         <p class="text-sm text-gray-500">
-                          Choose whether you will tutor virtually or in-person.
+                          Select whether you want virtual or in-person tutoring.
                         </p>
                         <div class="mt-4 space-y-4 col-span-3">
                           <div class="flex items-center">
@@ -582,7 +581,7 @@ function CreateClient(props) {
                   Availability
                 </h3>
                 <p class="mt-1 text-sm text-gray-600">
-                  Select what times you are available to offer tutoring.
+                  Select what times you are available.
                 </p>
               </div>
             </div>
@@ -669,7 +668,7 @@ function CreateClient(props) {
                         Availability by Week
                       </legend>
                       <p class="text-sm text-gray-500">
-                        Select what days you are available to offer tutoring.
+                        Select what days you are available for tutoring.
                       </p>
                       <div class="mt-4 space-y-4">
                         <div class="flex items-start">
