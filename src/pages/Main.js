@@ -17,7 +17,7 @@ function Main() {
     <div className="min-h-screen bg-gray-100 drop-shadow-sm">
       <div className="relative bg-white overflow-hidden drop-shadow-lg">
         <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+          <div className="relative z-10 pb-8 pt-2 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
             <div className="relative pt-1 pr-4 sm:pr-6 lg:px-3">
               {/*Navbar*/}
               <Disclosure as="nav" className="bg-white ">
@@ -112,7 +112,7 @@ function Main() {
             >
               <polygon points="50,0 100,0 50,100 0,100" />
             </svg>
-            <div className="border border-b-2 border-t-0 border-x-0 border-gray-300 mt-3"></div>
+            <div className="border border-b-2 border-t-0 border-x-0 border-gray-300 mt-3 lg:mx-8"></div>
 
             <main class="mt-5 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-16 lg:px-8 xl:mt-17">
               <div class="sm:text-center lg:text-left">
@@ -158,9 +158,12 @@ function Main() {
         </div>
       </div>
       <div className="bg-gray-100">
-        <div className=" max-w-7xl mx-auto  grid grid-cols-1 md:grid-cols-2">
-          <div className="flex drop-shadow-lg md:my-10 mt-10 place-content-center">
-            <a href="/find-a-tutor" className="relative w-[70%]">
+        <div className=" max-w-7xl mx-auto  grid grid-cols-1 lg:grid-cols-2">
+          <div className="flex drop-shadow-lg md:my-12 mt-10 place-content-center">
+            <a
+              href="/find-a-tutor"
+              className="relative mx-10 hover:scale-105 transition duration-75 "
+            >
               <img
                 src="/images/FindTutorImage.png"
                 alt="Find a tutor page"
@@ -172,7 +175,7 @@ function Main() {
             <p className=" text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl text-center md:text-left">
               How does it work?
             </p>
-            <p className="mt-4 max-w-5xl text-xl text-gray-500 text-center md:text-left ">
+            <p className="mt-4 max-w-5xl text-xl lg:text-2xl md:mr-10 text-gray-500 text-center md:text-left ">
               Simply upload a listing with your details onto Tutorial. Your
               listing will be able to be viewed by anyone seeking your services.
             </p>
@@ -180,7 +183,7 @@ function Main() {
               <div className="absolute mt-1 flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white ">
                 <ClockIcon className="h-6 w-6" aria-hidden="true" />
               </div>
-              <p className="ml-16 max-w-5xl text-gray-500 mt-10">
+              <p className="ml-16 max-w-5xl text-lg lg:text-xl md:mr-10 text-gray-500 mt-10">
                 Tutorial allows clients and tutors to connect with each other
                 and find each other quickly. No more asking around on chats
                 anymore - now you can easily discover suitable tutors/clients.
@@ -190,7 +193,7 @@ function Main() {
               <div className="absolute  flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white ">
                 <UserIcon className=" h-6 w-6" aria-hidden="true" />
               </div>
-              <p className="ml-16 max-w-5xl  text-gray-500 mt-10">
+              <p className="ml-16 max-w-5xl text-lg lg:text-xl md:mr-10 text-gray-500 mt-10">
                 Tutorial allows every individual to share necessary information
                 about their details and requirements. However, if you have any
                 reservations, you can easily email them and contact them for
