@@ -20,7 +20,7 @@ function Navbar(props) {
       <Disclosure as="nav">
         {({ open }) => (
           <>
-            <div className="max-w-7xl mx-auto px-2 sm:px-1 lg:px-2 border-b-indigo-500">
+            <div className="max-w-7xl mx-auto px-2 sm:px-1 py-[0.4rem] lg:px-2 border-b-indigo-500">
               <div className="relative flex items-center justify-between h-16">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
@@ -33,21 +33,21 @@ function Navbar(props) {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex-1 flex my-auto items-center justify-center sm:items-stretch sm:justify-start">
                   <a href="/" className="flex-shrink-0 flex items-center">
                     <img
-                      className="hidden lg:block h-10 w-auto"
+                      className="hidden lg:block h-[2.85rem] w-auto"
                       src="/images/TutorialNavbarLogo.png"
                       alt="TutorialLogo"
                       href="/"
                     />
                     <img
-                      className="block lg:hidden h-10 w-auto"
+                      className="block lg:hidden h-[2.85rem] w-auto"
                       src="/images/TutorialNavbarLogo.png"
                       alt="TutorialLogo"
                     />
                   </a>
-                  <div className="hidden sm:block sm:ml-6">
+                  <div className="hidden sm:block sm:ml-3 my-auto">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
                         <a
@@ -77,7 +77,7 @@ function Navbar(props) {
                     href={item.href}
                     className={classNames(
                       item.page === props.page
-                        ? "hover:bg-gray-300 text-gray-700 w-[30%] border border-t-0 border-l-0 border-r-0 border-b-4 border-indigo-500"
+                        ? "hover:bg-gray-300 text-gray-700 md:w-[30%] border border-t-0 border-l-0 border-r-0 border-b-4 border-indigo-500"
                         : "text-gray-400 hover:bg-gray-300 hover:text-gray-700",
                       "block px-3 py-2 text-base font-medium"
                     )}

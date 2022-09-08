@@ -89,7 +89,7 @@ function Main() {
                             href={item.href}
                             className={classNames(
                               item.page === "Home"
-                                ? "hover:bg-gray-300 text-gray-700 w-[30%] border border-t-0 border-l-0 border-r-0 border-b-4 border-indigo-500"
+                                ? "hover:bg-gray-300 text-gray-700 md:w-[30%] border border-t-0 border-l-0 border-r-0 border-b-4 border-indigo-500"
                                 : "text-gray-400 hover:bg-gray-300 hover:text-gray-700",
                               "block px-3 py-2 text-base font-medium"
                             )}
@@ -120,7 +120,7 @@ function Main() {
                   <span class="block xl:inline">Find a tutor</span>
                   <span class="block text-indigo-600 xl:inline"> near you</span>
                 </h1>
-                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                <p class="mt-3 max-w-md text-base text-gray-500 sm:mt-5 sm:text-lg lg:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                   Tutorial allows clients and tutors to find and connect each
                   other for their needs. No signup needed - just put your
                   listing on Tutorial.
@@ -162,20 +162,21 @@ function Main() {
           <div className="flex drop-shadow-lg md:my-12 mt-10 place-content-center">
             <a
               href="/find-a-tutor"
-              className="relative mx-10 hover:scale-105 transition duration-75 "
+              className="relative mx-8 hover:scale-105 transition duration-75 "
             >
               <img
                 src="/images/FindTutorImage.png"
                 alt="Find a tutor page"
+                className=" rounded-lg"
               ></img>
             </a>
           </div>
 
-          <div className=" place-content-center mt-20 mb-10 mx-10 md:mx-0">
+          <div className="md:ml-8 place-content-center mt-20 mb-10 mx-4 md:mx-0">
             <p className=" text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl text-center md:text-left">
               How does it work?
             </p>
-            <p className="mt-4 max-w-5xl text-xl lg:text-2xl md:mr-10 text-gray-500 text-center md:text-left ">
+            <p className="mt-4 max-w-5xl text-xl md:mx-0 mx-2 lg:text-2xl md:mr-10 text-gray-500 text-center md:text-left ">
               Simply upload a listing with your details onto Tutorial. Your
               listing will be able to be viewed by anyone seeking your services.
             </p>
