@@ -1,5 +1,5 @@
 const Constants = {
-  SERVER_HOST: "https://tutorial-backend-server.herokuapp.com",
+  SERVER_HOST: "https://tutorial-server.vercel.app",
 };
 
 export default Constants;

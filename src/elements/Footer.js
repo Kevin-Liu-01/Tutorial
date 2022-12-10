@@ -3,7 +3,7 @@ import "../App.css";
 function Footer() {
   return (
     <div class="bg-gray-50 ">
-      <footer class="p-4 sm:p-6 dark:bg-gray-800 max-w-7xl mx-auto">
+      <footer class="p-4 sm:p-6  max-w-7xl mx-auto">
         <div class="md:flex md:justify-between">
           <div class="mb-14 md:mb-0">
             <a href="/" class="flex items-center mt-8">
@@ -16,10 +16,10 @@ function Footer() {
           </div>
           <div class="ml-2 grid grid-cols-2 gap-8 sm:gap-6 ">
             <div>
-              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                 Resources
               </h2>
-              <ul class="text-gray-600 dark:text-gray-400">
+              <ul class="text-gray-600 ">
                 <li class="mb-4">
                   <a href="/Rules" class="hover:underline">
                     Rules
@@ -34,10 +34,10 @@ function Footer() {
             </div>
 
             <div>
-              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                 Legal
               </h2>
-              <ul class="text-gray-600 dark:text-gray-400">
+              <ul class="text-gray-600 ">
                 <li class="mb-4">
                   <a href="/Privacy-Policy" class="hover:underline">
                     Privacy Policy
@@ -52,9 +52,9 @@ function Footer() {
             </div>
           </div>
         </div>
-        <hr class="my-6 border-gray-300 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <hr class="my-6 border-gray-300 sm:mx-auto  lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          <span class="text-sm text-gray-500 sm:text-center ">
             © 2022{" "}
             <a href="/" class="hover:underline">
               Tutorial™
@@ -64,7 +64,7 @@ function Footer() {
           <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
             <a
               href="mailto:tutorialofficial@gmail.com"
-              class="text-gray-500 hover:text-yellow-400 dark:hover:text-white"
+              class="text-gray-500 hover:text-yellow-400 "
             >
               <svg
                 aria-hidden="true"
@@ -84,7 +84,7 @@ function Footer() {
             </a>
             <a
               href="https://www.instagram.com/tutorialof/"
-              class="text-gray-500 hover:text-pink-400 dark:hover:text-white"
+              class="text-gray-500 hover:text-pink-400 "
             >
               <svg
                 aria-hidden="true"
@@ -104,7 +104,7 @@ function Footer() {
             </a>
             <a
               href="https://twitter.com/tutorialofficial"
-              class="text-gray-500 hover:text-blue-400 dark:hover:text-white"
+              class="text-gray-500 hover:text-blue-400 "
             >
               <svg
                 aria-hidden="true"
