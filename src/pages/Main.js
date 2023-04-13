@@ -152,7 +152,7 @@ function Main() {
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <img
             class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-            src="https://schoolnotices-production.s3.eu-west-2.amazonaws.com/wp-content/uploads/2022/02/08081748/tutoring.jpg"
+            src="https://i0.wp.com/www.additudemag.com/wp-content/uploads/2016/11/School_Homework-Tutoring_Article-847_Girl-tutor-library-ts_474967154-1.jpg"
             alt=""
           />
         </div>
